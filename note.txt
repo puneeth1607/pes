@@ -1,0 +1,28 @@
+app.post('/register', (req,res)=>{
+    // console.log(req.body)
+    // res.send('Register data updated')
+    // res.redirect('/') // redirect to home page after successful registration
+    
+    // create new user in database
+    const user = new UserModel({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    })
+    user.save().then(() => res.redirect('/')) // redirect to home page after successful registration
+
+    // error handling
+    user.save().catch(err => console.log(err)) // print error if saving user fails
+      
+
+    // // create new user in database with error handling
+    // UserModel.create({
+    //     name: req.body.name,
+    //     email: req.body.email,
+    //     password: req.body.password
+    // })
+    // .then(() => res.redirect('/')) // redirect to home page after successful registration
+    // .catch(err => console.log(err)) // print error if creating user fails
+    
+
+})
